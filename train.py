@@ -3,7 +3,6 @@ from models.nerf_system import MipNeRFSystem
 from pytorch_lightning import Trainer
 from pytorch_lightning.callbacks import ModelCheckpoint, TQDMProgressBar
 from pytorch_lightning.loggers import TensorBoardLogger
-from pytorch_lightning.plugins import DDPPlugin
 import argparse
 import os
 from configs.config import parse_args
@@ -59,7 +58,7 @@ def main(hparams):
         num_sanity_val_steps=1,
         benchmark=True,
         profiler="simple" if hparams['num_gpus'] == 1 else None,
-        strategy=DDPPlugin(find_unused_parameters=False) if hparams['num_gpus'] > 1 else None,
+        strategy='ddp', # if hparams['num_gpus'] > 1 else None,
         limit_val_batches=hparams['val.sample_num']
     )
 

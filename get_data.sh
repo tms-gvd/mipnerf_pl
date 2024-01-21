@@ -2,7 +2,7 @@ echo "Downloading example data..."
 wget -P data http://cseweb.ucsd.edu/~viscomp/projects/LF/papers/ECCV20/nerf/nerf_example_data.zip
 
 echo "Unzipping data..."
-unzip data/nerf_example_data.zip -d data
+unzip -q data/nerf_example_data.zip -d data
 
 echo "Generate multi scale images..."
 mkdir data/multi_scale

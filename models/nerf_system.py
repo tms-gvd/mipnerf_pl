@@ -141,7 +141,7 @@ class MipNeRFSystem(LightningModule):
                                           stack, self.global_step)
         return log
 
-    def validation_epoch_end(self, outputs):
+    def on_validation_epoch_end(self, outputs):
         mean_loss = torch.stack([x['val/loss'] for x in outputs]).mean()
         mean_psnr = torch.stack([x['val/psnr'] for x in outputs]).mean()
 

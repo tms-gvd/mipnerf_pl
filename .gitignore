@@ -133,3 +133,5 @@ dmypy.json
 __**.py
 data/
 cache/
+logs/
+ckpt/
