@@ -32,7 +32,8 @@ def setup_seed(seed):
 def main(hparams):
     setup_seed(hparams['seed'])
     system = MipNeRFSystem(hparams)
-    ckpt_cb = ModelCheckpoint(dirpath=os.path.join(hparams['out_dir'], 'ckpt', hparams['exp_name']),
+    os.makedirs(os.path.join('ckpt', hparams['exp_name']), exist_ok=True)
+    ckpt_cb = ModelCheckpoint(dirpath=os.path.join('ckpt', hparams['exp_name']),
                               save_last=True,
                               monitor='val/psnr',
                               mode='max',
@@ -41,7 +42,8 @@ def main(hparams):
     pbar = TQDMProgressBar(refresh_rate=1)
     callbacks = [ckpt_cb, pbar]
 
-    logger = TensorBoardLogger(save_dir=os.path.join(hparams['out_dir'], "logs"),
+    os.makedirs(os.path.join('logs', hparams['exp_name']), exist_ok=True)
+    logger = TensorBoardLogger(save_dir="logs",
                                name=hparams['exp_name'],
                                default_hp_metric=False)
 
